@@ -1,0 +1,48 @@
+1744832044155	geckodriver	INFO	Listening on 127.0.0.1:63337
+1744832047259	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63338" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Akram\\AppData\\Local\\Temp\\rust_mozprofile55nGvv"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1744832049735	Marionette	INFO	Marionette enabled
+1744832050812	Marionette	INFO	Listening on port 63371
+Read port: 63371
+WebDriver BiDi listening on ws://127.0.0.1:63338
+1744832051212	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:63338/devtools/browser/97491ac9-352e-4452-8fa6-674a5f032a31
+JavaScript warning: https://uber-api.arkoselabs.com/v2/30000F36-CADF-490C-929A-C6A7DD8B33C4/api.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.cdn-net.com/cc.js?sid=bbc661585c424072, line 52: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1744832079988	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+1744832082757	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.sys.mjs:219:24
+TimedPromise@chrome://remote/content/marionette/sync.sys.mjs:203:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.sys.mjs:467:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:220:33
+JavaScript warning: https://auth.uber.com/v2/_static/client-vendor-fusion-e0593ff1c62b56d1.js, line 66: Script terminated by timeout at:
+o@https://auth.uber.com/v2/_static/client-vendor-fusion-e0593ff1c62b56d1.js:66:77432
+24932/G/</<@https://auth.uber.com/v2/_static/client-vendor-fusion-e0593ff1c62b56d1.js:66:77987
+e@https://auth.uber.com/v2/_static/client-vendor-fusion-e0593ff1c62b56d1.js:66:73676
+
+1744832110330	Marionette	INFO	Stopped listening on port 63371
+Dynamically enable window occlusion 1
+1744833090815	geckodriver	INFO	Listening on 127.0.0.1:63665
+1744833093931	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "--start-maximized" "--remote-debuggi ... 6" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Akram\\AppData\\Local\\Temp\\rust_mozprofileyYyplJ"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1744833095301	Marionette	INFO	Marionette enabled
+console.error: "Warning: unrecognized command line flag" "-start-maximized"
+1744833095916	Marionette	INFO	Listening on port 63674
+WebDriver BiDi listening on ws://127.0.0.1:63666
+Read port: 63674
+1744833096700	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:63666/devtools/browser/7717fb60-2150-4143-a462-5f27610a7614
+JavaScript warning: https://uber-api.arkoselabs.com/v2/30000F36-CADF-490C-929A-C6A7DD8B33C4/api.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.cdn-net.com/cc.js?sid=bbc661585c424072, line 52: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1744833122999	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.sys.mjs:219:24
+TimedPromise@chrome://remote/content/marionette/sync.sys.mjs:203:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.sys.mjs:467:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.sys.mjs:220:33
+1744833125685	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+1744833144564	Marionette	INFO	Stopped listening on port 63674
+Dynamically enable window occlusion 1

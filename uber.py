@@ -13,8 +13,34 @@ from selenium.webdriver.chrome.options import Options as COptions
 from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
 import re
 import browser_headers as bh
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+def wait_for_element_to_disappear(driver, by, value, timeout=300):
+    try:
+        # Wait until the element appears
+        WebDriverWait(driver, timeout).until(
+            EC.presence_of_element_located((by, value))
+        )
+        print("Element appeared, waiting for it to disappear...")
+
+        # Then wait until it's gone
+        WebDriverWait(driver, timeout).until_not(
+            EC.presence_of_element_located((by, value))
+        )
+        print("Element disappeared.")
+    except Exception as e:
+        print(f"Timeout or error: {e}")
 
 def init_driver_firefox(target_url="https://auth.uber.com/"):
+    mobile_emulation = {
+    "deviceMetrics": {"width": 375, "height": 812, "pixelRatio": 3.0},  # iPhone X size
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) "
+                 "AppleWebKit/605.1.15 (KHTML, like Gecko) "
+                 "Version/13.0.4 Mobile/15E148 Safari/604.1"
+    }
+    
+
     options = FOptions()
     options.add_argument("--start-maximized")
 
@@ -32,7 +58,7 @@ def init_driver_firefox(target_url="https://auth.uber.com/"):
     profile.update_preferences()
     driver = webdriver.Firefox(options=options, firefox_profile=profile)
     width, height = map(int, bh.get_random_screen_resolution().split('x'))
-    driver.set_window_size(width, height)
+    driver.set_window_size(375, 812)
     # Simulate a referrer with JavaScript injection
     driver.get("about:blank")
     referrer = bh.get_random_referrer()
@@ -54,7 +80,7 @@ def init_driver_firefox(target_url="https://auth.uber.com/"):
 
 
 
-def init_driver_chrome(target_url="https://auth.uber.com/",profile_dir="Default", user_data_dir="C:/Users/Akram/AppData/Local/Google/Chrome/User Data"):
+def init_driver_chrome(target_url="https://auth.uber.com/",profile_dir="Default", user_data_dir="%AppData%\\Local\\Google\\Chrome\\User Data"):
     print("Before init Chrome with undetected-chromedriver")
 
     # Set up Chrome options
@@ -155,16 +181,20 @@ def create_temp_email():
 # Wait for email and extract 6-digit code
 def get_verification_code(token):
     headers = {"Authorization": f"Bearer {token}"}
+    headers = {"Authorization": f"Bearer {token}"}
     for _ in range(15):
         inbox = requests.get("https://api.mail.tm/messages", headers=headers).json()
         if inbox['hydra:member']:
             msg_id = inbox['hydra:member'][0]['id']
             msg = requests.get(f"https://api.mail.tm/messages/{msg_id}", headers=headers).json()
-            code_match = re.search(r'\b\d{4}\b', msg['text'])
+            lines = msg['text'].splitlines()
+            code_match = re.search(r'\b\d{4}\b', lines[17])
+            print(code_match)
             if code_match:
                 return code_match.group(0)
         time.sleep(3)
     return None
+
 
 def save_to_csv(email, password, code, success):
     file_exists = os.path.isfile("accounts.csv")
@@ -186,10 +216,12 @@ print('site accessed')
 
 reg_steps.email_step(driver, temp_email)
 time.sleep(3)
-bypass.check_captcha(driver )
+#<p tabindex="-1" data-theme="home.instructions" class="sc-1io4bok-0 KalLU sc-d5trka-0 text">Please solve this puzzle so we know you are a real person</p>
+wait_for_element_to_disappear(driver, By.ID, "FunCaptcha")
 # Wait for email and grab verification code
 print("Waiting for verification code email...")
 code = get_verification_code(temp_email["token"])
+
 
 if code:
     print("Verification code received:", code)
@@ -212,13 +244,13 @@ time.sleep(3)
 
 driver.find_element(By.ID, "FIRST_NAME").send_keys("Test")
 driver.find_element(By.ID, "LAST_NAME").send_keys("User")
+driver.find_element(By.ID, "forward-button").click()
 
+time.sleep(10)
 
-time.sleep(3)
+driver.find_element(By.ID, 'LEGAL_ACCEPT_TERMS').click()
 
-driver.find_element(By.CSS_SELECTOR, 'input[type="checkbox"]').click()
-
-time.sleep(1)
+time.sleep(5)
 driver.find_element(By.ID, "forward-button").click()
 
 save_to_csv(temp_email["email"], temp_email["password"], code, True)

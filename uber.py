@@ -32,7 +32,7 @@ def wait_for_element_to_disappear(driver, by, value, timeout=300):
     except Exception as e:
         print(f"Timeout or error: {e}")
 
-def init_driver_firefox(target_url="https://auth.uber.com/"):
+def init_driver_firefox(target_url="https://drivers.uber.com/?uclick_id=5b586b51-5995-4af6-a666-df0ada98b39b&amp;marketing_vistor_id=f378b114-00ad-4f62-9b04-838a2a51af98"):
     mobile_emulation = {
     "deviceMetrics": {"width": 375, "height": 812, "pixelRatio": 3.0},  # iPhone X size
     "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) "
@@ -80,7 +80,7 @@ def init_driver_firefox(target_url="https://auth.uber.com/"):
 
 
 
-def init_driver_chrome(target_url="https://auth.uber.com/",profile_dir="Default", user_data_dir="%AppData%\\Local\\Google\\Chrome\\User Data"):
+def init_driver_chrome(target_url="https://drivers.uber.com/?uclick_id=5b586b51-5995-4af6-a666-df0ada98b39b&amp;marketing_vistor_id=f378b114-00ad-4f62-9b04-838a2a51af98",profile_dir="Default", user_data_dir="%AppData%\\Local\\Google\\Chrome\\User Data"):
     print("Before init Chrome with undetected-chromedriver")
 
     # Set up Chrome options
@@ -209,7 +209,7 @@ temp_email = create_temp_email()
 print("Temporary email:", temp_email["email"])
 print("Temporary password:", temp_email["password"])
 
-driver =init_driver_chrome('https://auth.uber.com/')
+driver =init_driver_chrome('https://drivers.uber.com/?uclick_id=5b586b51-5995-4af6-a666-df0ada98b39b&amp;marketing_vistor_id=f378b114-00ad-4f62-9b04-838a2a51af98')
 time.sleep(3)
 
 print('site accessed')
@@ -236,8 +236,12 @@ else:
 
 time.sleep(3)
 
+first_digit = random.choice([5, 6])
+remaining_digits = random.randint(0, 99999999)
+number = int(f"{first_digit}{remaining_digits:08d}")
 
-driver.find_element(By.ID, "alt-action-skip").click()
+
+driver.find_element(By.ID, "PHONE_NUMBER").send_keys(number)
 
 
 time.sleep(3)
